@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<title>Taskle</title>
+<meta name="description" content="A super minimal To Do web app, inspired by Wordle">
+
+<meta property="og:url" content="https://ringierx.com/taskle/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Taskle - a super minimal To Do web app, inspred by Wordle">
+<meta property="og:description" content="A super minimal To Do web app, inspired by Wordle">
+<meta property="og:image" content="https://ringierx.com/taskle/taskle-og.png">
+
+  <title>Taskle</title>
+  <link rel="stylesheet" href="taskle-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Poppins:wght@200;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <link rel="icon" type="image/png" href="taskle-favicon.png">
+ <!-- Manifest File -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Add to Home Screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Taskle">
+  <link rel="apple-touch-icon" href="taskle-icon-192.png">
+
+  <!-- Theme Color for Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#FEF9C7">
+
+  <link rel="stylesheet" href="taskle-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Poppins:wght@200;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <link rel="icon" type="image/png" href="taskle-favicon.png">
+
+</head>
+
+<body>
+  
+  <div class="header">
+    <h1>Taskle</h1>
+    <i class="fas fa-question-circle help-icon" onclick="toggleHelpOverlay()"></i>
+  </div>
+
+  <div id="help-overlay" class="overlay">
+    <div class="message-wrap">
+      <img class="logo" src="taskle-logo.png">
+       <h2>How It Works</h2>
+          <ul>
+            <li>Create your tasks for the day.</li>
+            <li>Drag them into buckets.</li>
+            <li>Click to mark as complete.</li>
+            <li>Click All Done when it's home time</li>
+          </ul>
+          <p>At the end of the day, any uncompleted tasks get moved back into the task pool and become <i>tomorrow's problem</i> - then rinse and repeat.</p>
+
+          <div class="help-steps">
+            <img class="taskle-how-to" src=taskle-how-to.gif>
+          </div>
+          <div class="message-footer">
+             <p>Inspired by the beautifully minimal <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank" rel="noreferrer">Wordle</a></p>
+          </div>
+          <button onclick="toggleHelpOverlay()">Continue</button>
+    </div>
+  </div>
+
+  <div id="completion-overlay" class="overlay">
+    <div class="message-wrap">
+      <p id="completion-message"></p>
+      <p class="random-quote"></p>
+      <button id="close-all-done" onclick="closeOverlay()">Cheers!</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="left-column">
+      <div class="input-pool-wrap">
+        <div class="input-wrap">
+          <input type="text" id="new-task-input" placeholder="Enter task" onkeypress="handleKeyPress(event)">
+          <button class="add-task-btn" onclick="createTask()">Add Task</button>
+        </div>
+        <div id="task-pool" class="bucket">Task Pool</div>
+      </div>
+    </div>
+    <div class="right-column">
+      <div id="2-minute-tasks" class="bucket">2 Minute Tasks</div>
+      <div id="morning" class="bucket">Morning</div>
+      <div id="afternoon" class="bucket">Afternoon</div>
+      <button id="all-done-btn" onclick="allDone()">All done</button>
+    </div>
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+  <script src="taskle-script.js"></script>
+  
+    <!-- Register Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function(registration) {
+          console.log('Service Worker registered with scope:', registration.scope);
+        }).catch(function(error) {
+          console.log('Service Worker registration failed:', error);
+        });
+    }
+  </script>
+  
+  
+</body>
+</html>

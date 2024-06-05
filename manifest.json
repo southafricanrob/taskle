@@ -1,0 +1,41 @@
+{
+  "name": "Taskle",
+  "short_name": "Taskle",
+  "description": "A super minimal To Do web app, inspired by Wordle",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffd56a",
+  "icons": [
+    {
+      "src": "taskle-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "taskle-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "480x640",
+      "type": "image/png",
+      "label": "Taskle Main Screen",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Taskle Main Screen",
+      "form_factor": "wide"
+    }
+  ],
+  "id": "taskle_to_do",
+  "dir": "ltr",
+  "lang": "en",
+  "orientation": "any"
+}

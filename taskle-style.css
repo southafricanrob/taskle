@@ -1,0 +1,345 @@
+  body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;   
+    margin: 0;
+    padding: 0;
+    background-color: #FEF9C7;
+    color: #2C3E50;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .left-column, .right-column {
+    flex: 1 0 300px;
+    min-width: 300px;
+    padding: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  }
+
+  input, button, .bucket, .task {
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #2C3E50;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 1rem;
+  }
+
+  button {
+    cursor: pointer;
+    background-color: #6C5CE7;
+    color: white;
+    border: none;
+  }
+
+  button:hover {
+    background-color: #5A4498;
+  }
+
+  .bucket {
+    min-height: 100px;
+    background-color: #F7F1E3;
+  }
+
+  .task {
+    background-color: #FFD56B;
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .task.sortable-chosen {
+    opacity: 0.2;
+  }
+
+  .task.completed {
+    background-color: #57a351;
+    color: #ffffff;
+  }
+
+  .task .delete-icon {
+    visibility: visible;
+    color: #e74c3c;
+    margin-left: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    
+  }
+
+  .task:hover .delete-icon {
+    visibility: visible;
+  }
+
+  @media (min-width: 769px) {
+    .task .delete-icon {
+      visibility: hidden;
+    }
+
+    .task:hover .delete-icon {
+      visibility: visible;
+    }
+  }
+
+  .overlay, #help-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .overlay.active, #help-overlay.active {
+    display: flex;
+  }
+
+  #completion-message {
+    text-align: center;
+  }
+
+  .header {
+    width: 100%;
+    background-color: #fff;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+  }
+
+  .header .help-icon {
+    float: right;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+  }
+
+
+
+/*  overrides*/
+
+h1 , h2{
+
+  font-family: "Arvo", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;   
+    background-color: #fff;
+    font-size: 1rem;
+}
+.bucket {
+    padding: 10px;
+    margin: 10px 0;
+    border: 0;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.header {
+    width: 100%;
+    color: #000000;
+    height: 65px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: auto;
+    gap: 10px;
+    flex-direction: row;
+    min-height: calc(100vh - 150px);
+}
+
+.left-column, .right-column {
+    flex: 1 0 300px;
+    min-width: 300px;
+    padding: 10px;
+    min-width: 47%;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.bucket {
+/*    min-height: 100px;*/
+    background-color: #fff;
+    text-align: center;
+    font-weight: 200;
+    font-size: 0.85rem;
+    color:rgba(0,0,0,0.7);
+    margin: 0 0 10px 0;
+    min-height: calc(33vh - 110px);
+
+}
+
+
+.task {
+    background-color: #FFD56B;
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 1rem;
+    border: 0;
+}
+#task-pool .task {
+    background-color: #d3d6da;
+}
+
+#task-pool .task.completed {
+    background-color: #57a351;
+}
+
+.input-pool-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-wrap {
+    border-radius: 10px;
+    padding: 0 0 0 10px;
+    border: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+    background: #fff;
+}
+
+input#new-task-input {
+    width: 100%;
+    border: 0;
+}
+
+button {
+    cursor: pointer;
+    background-color: #303030;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    height: 44px;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #57a351;
+}
+
+.add-task-btn {
+    border-radius: 0 10px 10px 0;
+    width: 150px;
+    background-color: #303030;
+}
+#all-done-btn {
+    width: 100%;
+}
+
+#close-all-done {
+    margin: auto;
+    display: block;
+}
+
+#new-task-input {
+    outline: 0;
+}
+
+.message-wrap{
+    position: relative;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0 4px 23px 0 rgba(0,0,0,.2);
+    width: 90%;
+    max-height: 100%;
+    overflow-y: auto;
+    max-width: 520px;
+    box-sizing: border-box;
+    text-align: left;
+    padding: 32px;
+}
+.quoter {
+    display: block;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top:5px;
+}
+.quote {
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+a {
+    color: #57a351;
+    text-decoration: none;
+}
+
+@media(max-width:768px){
+    .left-column, {
+        flex: 1 0;
+    }
+    .container {
+        margin: 10px;
+    }
+    .bucket {
+        margin: 0;
+    }
+
+    .left-column, .right-column {
+        flex: 1 0;
+        padding: 10px;
+        min-width: 47%;
+        background: unset;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: rgba(0, 0, 0, 0.05);
+
+    }
+    .add-task-btn {
+        padding: 10px 15px;
+        width: 140px;
+    }
+
+}
+.fa-question-circle:before {
+    content: "\f059";
+    font-size: 1.4rem;
+}
+
+.taskle-how-to {
+    width: 100%;
+}
+.logo{
+    width: 80px;
+    float: right;
+}
