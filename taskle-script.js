@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  ['task-pool', '2-minute-tasks', 'morning', 'afternoon'].forEach(initSortable);
+  ['task-pool', '2-minute-tasks', 'morning', 'afternoon', 'evening'].forEach(initSortable);
 
-  //document.getElementById('new-task-input').addEventListener('keypress', handleKeyPress);
   document.getElementById('all-done-btn').addEventListener('click', allDone);
   document.getElementById('all-done-btn').addEventListener('touchstart', allDone, { passive: false });
   document.getElementById('close-all-done').addEventListener('click', closeOverlay);
@@ -13,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   loadTasks();
+  initializeViewState(); // Added to initialize view state on page load
 });
 
 function initSortable(bucketId) {
@@ -192,7 +192,7 @@ function showNoCompletionMessage() {
 }
 
 function saveTasks() {
-  const buckets = ['task-pool', '2-minute-tasks', 'morning', 'afternoon'];
+  const buckets = ['task-pool', '2-minute-tasks', 'morning', 'afternoon', 'evening'];
   const tasksData = buckets.reduce((acc, bucketId) => {
     const bucketElem = document.getElementById(bucketId);
     const tasks = Array.from(bucketElem.children).map(task => {
@@ -235,3 +235,38 @@ function showConfetti() {
   });
 }
 
+// Function to toggle the "eisenhower" class and update bucket texts
+function toggleEisenhower() {
+  var containerDiv = document.querySelector('.container');
+  var eveningBucket = document.getElementById('evening');
+  var buckets = {
+    '2-minute-tasks': 'Do',
+    'morning': 'Decide',
+    'afternoon': 'Delegate'
+  };
+
+  // Toggle "eisenhower" class on columns
+  containerDiv.classList.toggle('eisenhower');
+
+  // Toggle evening bucket visibility based on "eisenhower" class
+  if (containerDiv.classList.contains('eisenhower')) {
+    eveningBucket.style.display = 'block';
+    localStorage.setItem('eisenhowerView', 'true'); // Store state in localStorage
+  } else {
+    eveningBucket.style.display = 'none';
+    localStorage.setItem('eisenhowerView', 'false'); // Store state in localStorage
+  }
+
+// Function to initialize view state based on localStorage
+
+function initializeViewState() {
+
+  var eisenhowerView = localStorage.getItem('eisenhowerView');
+
+  if (eisenhowerView === 'true') {
+
+    toggleEisenhower();
+
+  }
+
+}

@@ -16,7 +16,7 @@
   }
 
   .left-column, .right-column {
-    flex: 1 0 300px;
+/*    flex: 1 0 300px;*/
     min-width: 300px;
     padding: 10px;
   }
@@ -121,11 +121,15 @@
     box-sizing: border-box;
   }
 
-  .header .help-icon {
+  .header .nav-wrapper {
     float: right;
     cursor: pointer;
     position: absolute;
     right: 20px;
+  }
+  .header .nav-icon {
+    margin: 5px;
+    font-size: 1.4rem;
   }
 
 
@@ -155,6 +159,9 @@ body {
 }
 
 .header {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
     width: 100%;
     color: #000000;
     height: 65px;
@@ -176,7 +183,7 @@ body {
 }
 
 .left-column, .right-column {
-    flex: 1 0 300px;
+/*    flex: 1 0 300px;*/
     min-width: 300px;
     padding: 10px;
     min-width: 47%;
@@ -186,7 +193,6 @@ body {
 }
 
 .bucket {
-/*    min-height: 100px;*/
     background-color: #fff;
     text-align: center;
     font-weight: 200;
@@ -245,7 +251,7 @@ button {
     color: white;
     border: none;
     border-radius: 10px;
-    padding: 10px 25px;
+    padding: 10px 16px;
     height: 44px;
     font-size: 1rem;
 }
@@ -256,7 +262,7 @@ button:hover {
 
 .add-task-btn {
     border-radius: 0 10px 10px 0;
-    width: 150px;
+    width: 140px;
     background-color: #303030;
 }
 #all-done-btn {
@@ -304,9 +310,17 @@ a {
 }
 
 @media(max-width:768px){
-    .left-column, {
-        flex: 1 0;
+    .task {
+        padding: 6px;
+        font-size: 0.9rem;
+        line-height:1.1rem;
     }
+    .task .delete-icon {
+        font-size: 0.8rem;
+    }
+    /*.left-column, {
+        flex: 1 0;
+    }*/
     .container {
         margin: 10px;
     }
@@ -328,6 +342,7 @@ a {
     .add-task-btn {
         padding: 10px 15px;
         width: 140px;
+        font-size: 0.9rem;
     }
 
 }
@@ -342,4 +357,28 @@ a {
 .logo{
     width: 80px;
     float: right;
+}
+
+/*override styles of buckets in Eisenhower view*/
+.eisenhower .right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.eisenhower .row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
+    gap: 10px;
+}
+.eisenhower .right-column .bucket{
+    width:45%;
+}
+.eisenhower .left-column {
+    min-width: 38%;
+}
+.eisenhower .right-column {
+    min-width: 54%;
 }
