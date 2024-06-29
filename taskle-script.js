@@ -256,6 +256,7 @@ function toggleEisenhower() {
     eveningBucket.style.display = 'none';
     localStorage.setItem('eisenhowerView', 'false'); // Store state in localStorage
   }
+}
 
 // Function to initialize view state based on localStorage
 
