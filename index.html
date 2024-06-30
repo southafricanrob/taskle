@@ -14,6 +14,8 @@
   <meta property="og:image" content="https://southafricanrob.github.io/taskle/taskle-og.png">
 
   <link rel="stylesheet" href="taskle-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,12 +90,24 @@
     </div>
     <div class="right-column">
       <div class="row">
-        <div id="2-minute-tasks" class="bucket">2 Minute Tasks</div>
-        <div id="morning" class="bucket">Morning</div>
+        <div id="2-minute-tasks" class="bucket">
+            <div class="bucket-label">2 Minute Tasks</div>
+            <!-- Tasks go here -->
+        </div>
+        <div id="morning" class="bucket">
+            <div class="bucket-label">Morning</div>
+            <!-- Tasks go here -->
+        </div>
       </div>
       <div class="row">
-        <div id="afternoon" class="bucket">Afternoon</div>
-        <div id="evening" class="bucket" style="display: none;">Evening</div> <!-- Initially hidden -->
+        <div id="afternoon" class="bucket">
+            <div class="bucket-label">Afternoon</div>
+            <!-- Tasks go here -->
+        </div>
+        <div id="evening" style="display: none;" class="bucket"><!-- Initially hidden -->
+            <div class="bucket-label">Delete</div>
+            <!-- Tasks go here -->
+        </div>
       </div>
       <button id="all-done-btn" onclick="allDone()">All done</button>
     </div>

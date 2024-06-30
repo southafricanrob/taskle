@@ -95,6 +95,7 @@
   .overlay, #help-overlay {
     display: none;
     position: fixed;
+    z-index: 9;
     top: 0;
     left: 0;
     width: 100%;
@@ -335,7 +336,7 @@ a {
         background: unset;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 10px;
         background-color: rgba(0, 0, 0, 0.05);
 
     }
@@ -343,6 +344,9 @@ a {
         padding: 10px 15px;
         width: 140px;
         font-size: 0.9rem;
+    }
+    .row {
+        gap: 10px;
     }
 
 }
@@ -366,6 +370,13 @@ a {
     justify-content: space-between;
 }
 
+.row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+/*    gap: 10px;*/
+}
+
 .eisenhower .row {
     display: flex;
     flex-direction: row;
@@ -373,7 +384,7 @@ a {
     height: 50%;
     gap: 10px;
 }
-.eisenhower .right-column .bucket{
+.eisenhower.right-column .bucket{
     width:45%;
 }
 .eisenhower .left-column {
@@ -381,4 +392,14 @@ a {
 }
 .eisenhower .right-column {
     min-width: 54%;
+}
+
+.right-column .bucket{
+    padding-top:30px;
+    position: relative;
+}
+.bucket-label {
+    position: absolute;
+    top:10px;
+    width:94%; 
 }

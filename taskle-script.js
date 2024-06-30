@@ -1,18 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Initializing Sortable for each bucket
   ['task-pool', '2-minute-tasks', 'morning', 'afternoon', 'evening'].forEach(initSortable);
 
+  // Add event listeners
   document.getElementById('all-done-btn').addEventListener('click', allDone);
   document.getElementById('all-done-btn').addEventListener('touchstart', allDone, { passive: false });
   document.getElementById('close-all-done').addEventListener('click', closeOverlay);
   document.getElementById('close-all-done').addEventListener('touchstart', closeOverlay, { passive: false });
 
+  // Show help overlay if first visit
   if (!localStorage.getItem('visited')) {
     toggleHelpOverlay();
     localStorage.setItem('visited', 'true');
   }
 
+  // Load tasks from local storage
   loadTasks();
-  initializeViewState(); // Added to initialize view state on page load
+  initializeViewState();
+
+  // Apply initial view state from local storage
+  const isEisenhowerView = localStorage.getItem('eisenhowerView') === 'true';
+  if (isEisenhowerView) {
+    document.querySelector('.right-column').classList.add('eisenhower');
+  }
+  updateBucketLabels(isEisenhowerView);
 });
 
 function initSortable(bucketId) {
@@ -20,11 +31,10 @@ function initSortable(bucketId) {
     group: 'shared',
     animation: 150,
     onStart: function(evt) {
-      evt.item.dragging = false; // We'll use this to track the drag status
+      evt.item.dragging = false;
     },
     onMove: function(evt) {
-      // Measure the distance moved
-      const threshold = 10; // Adjust this value as needed
+      const threshold = 10;
       const distance = Math.sqrt(
         Math.pow(evt.originalEvent.clientX - evt.originalEvent.clientX, 2) +
         Math.pow(evt.originalEvent.clientY - evt.originalEvent.clientY, 2)
@@ -98,7 +108,7 @@ function handleTouchStart(event) {
   task.touchStartX = event.touches[0].clientX;
   task.touchStartY = event.touches[0].clientY;
   task.touchStartTime = Date.now();
-  task.dragging = false; // reset dragging flag
+  task.dragging = false;
 }
 
 function handleTouchMove(event) {
@@ -110,7 +120,7 @@ function handleTouchMove(event) {
     Math.pow(touchX - task.touchStartX, 2) + Math.pow(touchY - task.touchStartY, 2)
   );
 
-  const threshold = 10; // Adjust this threshold as needed
+  const threshold = 10;
   if (distance > threshold) {
     task.dragging = true;
   }
@@ -137,8 +147,6 @@ function allDone() {
     showConfetti();
     showCompletionMessage();
     completedTasks.forEach(task => task.remove());
-  } else {
-    //showNoCompletionMessage();
   }
 
   const tasks = document.querySelectorAll('.right-column .task:not(.completed)');
@@ -183,21 +191,15 @@ function showCompletionMessage() {
   document.getElementById('completion-overlay').classList.add('active');
 }
 
-function showNoCompletionMessage() {
-  document.getElementById('completion-message').innerHTML = `
-    Oh dear - you didn't complete anything...
-    <br><br>Nevermind - they are now <i>tomorrow's problem ;-)</i>`;
-
-  document.getElementById('completion-overlay').classList.add('active');
-}
-
 function saveTasks() {
   const buckets = ['task-pool', '2-minute-tasks', 'morning', 'afternoon', 'evening'];
   const tasksData = buckets.reduce((acc, bucketId) => {
     const bucketElem = document.getElementById(bucketId);
-    const tasks = Array.from(bucketElem.children).map(task => {
-      return { text: task.textContent.trim(), completed: task.classList.contains('completed') };
-    });
+    const tasks = Array.from(bucketElem.children)
+      .filter(child => !child.classList.contains('bucket-label')) // Exclude labels
+      .map(task => {
+        return { text: task.textContent.trim(), completed: task.classList.contains('completed') };
+      });
 
     acc[bucketId] = tasks;
     return acc;
@@ -235,29 +237,41 @@ function showConfetti() {
   });
 }
 
-// Function to toggle the "eisenhower" class and update bucket texts
 function toggleEisenhower() {
-  var containerDiv = document.querySelector('.container');
+  var containerDiv = document.querySelector('.right-column');
   var eveningBucket = document.getElementById('evening');
+
+  var isEisenhowerView = containerDiv.classList.toggle('eisenhower');
+  // Save the view state to local storage
+  localStorage.setItem('eisenhowerView', isEisenhowerView);
+
+  // Toggle evening bucket visibility
+  if (isEisenhowerView) {
+    eveningBucket.style.display = 'block';
+  } else {
+    eveningBucket.style.display = 'none';
+  }
+
+  updateBucketLabels(isEisenhowerView);
+}
+
+function updateBucketLabels(isEisenhowerView) {
   var buckets = {
     '2-minute-tasks': 'Do',
     'morning': 'Decide',
     'afternoon': 'Delegate'
   };
 
-  // Toggle "eisenhower" class on columns
-  containerDiv.classList.toggle('eisenhower');
-
-  // Toggle evening bucket visibility based on "eisenhower" class
-  if (containerDiv.classList.contains('eisenhower')) {
-    eveningBucket.style.display = 'block';
-    localStorage.setItem('eisenhowerView', 'true'); // Store state in localStorage
-  } else {
-    eveningBucket.style.display = 'none';
-    localStorage.setItem('eisenhowerView', 'false'); // Store state in localStorage
+  for (var id in buckets) {
+    var bucket = document.getElementById(id);
+    if (bucket) {
+      var label = bucket.querySelector('.bucket-label');
+      if (label) {
+        label.textContent = isEisenhowerView ? buckets[id] : id.replace('-', ' ');
+      }
+    }
   }
 }
-
 // Function to initialize view state based on localStorage
 
 function initializeViewState() {
