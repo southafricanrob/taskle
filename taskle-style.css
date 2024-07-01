@@ -11,7 +11,7 @@
   .container {
     display: flex;
     flex-wrap: wrap;
-    max-width: 1000px;
+    max-width: 1140px;
     margin: auto;
   }
 
@@ -160,7 +160,7 @@ body {
 }
 
 .header {
-    max-width: 1000px;
+    max-width: 1140px;
     position: relative;
     margin: auto;
     width: 100%;
@@ -171,12 +171,16 @@ body {
     justify-content: center;
     flex-wrap: nowrap;
     align-items: center;
-
+}
+@media(max-width:768px){
+    .header {
+        justify-content: space-between;
+    }
 }
 .container {
     display: flex;
     flex-wrap: wrap;
-    max-width: 1000px;
+    max-width: 1140px;
     margin: auto;
     gap: 10px;
     flex-direction: row;
@@ -293,6 +297,20 @@ button:hover {
     text-align: left;
     padding: 32px;
 }
+.message-footer {
+    font-size: 0.9rem;
+    text-align:center;
+}
+#help-overlay button {
+    width: 100%; 
+}
+@media(max-width:768px){
+    .message-wrap{
+        font-size: 0.9rem;
+        line-height: 1.4rem;
+        padding: 20px;
+    }
+}
 .quoter {
     display: block;
     font-style: italic;
@@ -369,7 +387,10 @@ a {
 .eisenhower{
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+}
+.eisenhower .task{
+    padding: 8px;
 }
 @media(max-width:768px){
     .canvas{
@@ -377,6 +398,16 @@ a {
     }
     .eisenhower .canvas{
         gap: 0;
+    }
+}
+@media(min-width:769px){
+    .eisenhower .left-column {
+        min-width: unset;
+        width: 38%;
+    }
+    .eisenhower .right-column {
+        min-width: unset;
+        width: 54%;
     }
 }
 .canvas {
@@ -400,15 +431,10 @@ a {
     gap: 10px;
     background-color: #fff;
 }
-.eisenhower.right-column .bucket{
+.eisenhower .right-column .bucket{
     width:45%;
 }
-.eisenhower .left-column {
-    min-width: 38%;
-}
-.eisenhower .right-column {
-    min-width: 54%;
-}
+
 
 .right-column .bucket{
     padding-top:30px;

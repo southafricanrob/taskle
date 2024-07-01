@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Apply initial view state from local storage
   const isEisenhowerView = localStorage.getItem('eisenhowerView') === 'true';
   if (isEisenhowerView) {
-    document.querySelector('.right-column').classList.add('eisenhower');
+    document.querySelector('.container').classList.add('eisenhower');
   }
   updateBucketLabels(isEisenhowerView);
 });
@@ -31,21 +31,7 @@ function initSortable(bucketId) {
     group: 'shared',
     animation: 150,
     handle: '.task', // Only .task elements are draggable
-    onStart: function(evt) {
-      evt.item.dragging = false;
-    },
-    onMove: function(evt) {
-      const threshold = 10;
-      const distance = Math.sqrt(
-        Math.pow(evt.originalEvent.clientX - evt.originalEvent.clientX, 2) +
-        Math.pow(evt.originalEvent.clientY - evt.originalEvent.clientY, 2)
-      );
-      if (distance > threshold) {
-        evt.item.dragging = true;
-      }
-    },
     onEnd: function(evt) {
-      evt.item.dragging = false;
       saveTasks();
     }
   });
@@ -72,7 +58,6 @@ function createTaskElement(text) {
   task.setAttribute('draggable', true);
   task.addEventListener('click', toggleComplete);
   task.addEventListener('touchstart', handleTouchStart, { passive: false });
-  task.addEventListener('touchmove', handleTouchMove, { passive: false });
   task.addEventListener('touchend', handleTouchEnd, { passive: false });
 
   const deleteIcon = document.createElement('i');
@@ -98,39 +83,19 @@ function handleKeyPress(event) {
 
 function toggleComplete(event) {
   const task = event.currentTarget;
-  if (!task.dragging) {
-    task.classList.toggle('completed');
-    saveTasks();
-  }
+  task.classList.toggle('completed');
+  saveTasks();
 }
 
 function handleTouchStart(event) {
   const task = event.currentTarget;
-  task.touchStartX = event.touches[0].clientX;
-  task.touchStartY = event.touches[0].clientY;
   task.touchStartTime = Date.now();
-  task.dragging = false;
-}
-
-function handleTouchMove(event) {
-  const task = event.currentTarget;
-  const touchX = event.touches[0].clientX;
-  const touchY = event.touches[0].clientY;
-
-  const distance = Math.sqrt(
-    Math.pow(touchX - task.touchStartX, 2) + Math.pow(touchY - task.touchStartY, 2)
-  );
-
-  const threshold = 10;
-  if (distance > threshold) {
-    task.dragging = true;
-  }
 }
 
 function handleTouchEnd(event) {
   const task = event.currentTarget;
   const touchDuration = Date.now() - task.touchStartTime;
-  if (!task.dragging && touchDuration < 200) {
+  if (touchDuration < 50) { // 200ms should be a good threshold for tap detection
     toggleComplete(event);
   }
 }
@@ -239,7 +204,7 @@ function showConfetti() {
 }
 
 function toggleEisenhower() {
-  var containerDiv = document.querySelector('.right-column');
+  var containerDiv = document.querySelector('.container');
   var eveningBucket = document.getElementById('evening');
 
   var isEisenhowerView = containerDiv.classList.toggle('eisenhower');
@@ -277,13 +242,9 @@ function updateBucketLabels(isEisenhowerView) {
 // Function to initialize view state based on localStorage
 
 function initializeViewState() {
-
   var eisenhowerView = localStorage.getItem('eisenhowerView');
 
   if (eisenhowerView === 'true') {
-
     toggleEisenhower();
-
   }
-
 }
