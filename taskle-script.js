@@ -30,6 +30,7 @@ function initSortable(bucketId) {
   new Sortable(document.getElementById(bucketId), {
     group: 'shared',
     animation: 150,
+    handle: '.task', // Only .task elements are draggable
     onStart: function(evt) {
       evt.item.dragging = false;
     },
@@ -259,7 +260,8 @@ function updateBucketLabels(isEisenhowerView) {
   var buckets = {
     '2-minute-tasks': 'Do',
     'morning': 'Decide',
-    'afternoon': 'Delegate'
+    'afternoon': 'Delegate',
+    'evening': 'Delete'
   };
 
   for (var id in buckets) {

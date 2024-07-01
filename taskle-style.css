@@ -319,9 +319,6 @@ a {
     .task .delete-icon {
         font-size: 0.8rem;
     }
-    /*.left-column, {
-        flex: 1 0;
-    }*/
     .container {
         margin: 10px;
     }
@@ -369,20 +366,39 @@ a {
     flex-direction: column;
     justify-content: space-between;
 }
+.eisenhower{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+@media(max-width:768px){
+    .canvas{
+        gap: 10px;
+    }
+    .eisenhower .canvas{
+        gap: 0;
+    }
+}
+.canvas {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
 
 .row {
     display: flex;
     flex-direction: column;
     width: 100%;
-/*    gap: 10px;*/
 }
 
 .eisenhower .row {
+    flex: 1;
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 50%;
     gap: 10px;
+    background-color: #fff;
 }
 .eisenhower.right-column .bucket{
     width:45%;
@@ -403,3 +419,103 @@ a {
     top:10px;
     width:94%; 
 }
+
+
+.horizontal-line {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: -5px;
+  display: none;
+}
+.eisenhower .horizontal-line,
+.eisenhower .vertical-line
+ {
+    display: block;
+}
+.horizontal-line::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #d3d6da;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 0;
+}
+
+.urgent,
+.not-urgent {
+    background: #fff;
+    color: rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 1;
+    padding: 0 5px;
+    font-size: 10px;
+    font-weight: 300;
+    line-height: 10px;
+    white-space: nowrap;
+    }
+
+.urgent {
+    position: absolute;
+    left: 0;
+    top: -5px;
+}
+
+.not-urgent {
+    position: absolute;
+    right: 0;
+    top: -5px;
+}
+
+.vertical-line {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    text-align: center;
+    display: none;
+}
+
+.vertical-line::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: #d3d6da;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 0;
+}
+
+.important,
+.unimportant {
+    background: #fff;
+    color: rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 1;
+    padding: 0 5px;
+    font-size: 10px;
+    font-weight: 300;
+    line-height: 10px;
+    white-space: nowrap;
+}
+
+.important {
+    position: absolute;
+    top: 24%;
+    left: -30px;
+    transform: rotate(-90deg);
+}
+
+.unimportant {
+    position: absolute;
+    bottom: 24%;
+    left: -39px;
+    transform: rotate(-90deg);
+    }

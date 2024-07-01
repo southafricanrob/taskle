@@ -32,7 +32,7 @@
   <link rel="apple-touch-icon" href="taskle-icon-192.png">
 
   <!-- Theme Color for Chrome, Firefox OS and Opera -->
-  <meta name="theme-color" content="#FEF9C7">
+  <meta name="theme-color" content="#FFFFFF">
 
   <!-- 100% privacy-first analytics -->
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
@@ -58,6 +58,8 @@
         <li>Click to mark as complete.</li>
         <li>Click All Done when it's home time</li>
       </ul>
+      <p>Toggle views - defult or Eisenhower matrix <i class="fas fa-th-large table-cell-icon""></i></p>
+
       <p>At the end of the day, any uncompleted tasks get moved back into the task pool and become <i>tomorrow's problem</i> - then rinse and repeat.</p>
 
       <div class="help-steps">
@@ -89,26 +91,37 @@
       </div>
     </div>
     <div class="right-column">
-      <div class="row">
-        <div id="2-minute-tasks" class="bucket">
-            <div class="bucket-label">2 Minute Tasks</div>
-            <!-- Tasks go here -->
-        </div>
-        <div id="morning" class="bucket">
-            <div class="bucket-label">Morning</div>
-            <!-- Tasks go here -->
-        </div>
-      </div>
-      <div class="row">
-        <div id="afternoon" class="bucket">
-            <div class="bucket-label">Afternoon</div>
-            <!-- Tasks go here -->
-        </div>
-        <div id="evening" style="display: none;" class="bucket"><!-- Initially hidden -->
-            <div class="bucket-label">Delete</div>
-            <!-- Tasks go here -->
-        </div>
-      </div>
+<div class="canvas">
+  <div class="row">
+    <div id="2-minute-tasks" class="bucket">
+      <div class="bucket-label">2 Minute Tasks</div>
+      <!-- Tasks go here -->
+    </div>
+    <div id="morning" class="bucket">
+      <div class="bucket-label">Morning</div>
+      <!-- Tasks go here -->
+    </div>
+  </div>
+  <div class="horizontal-line">
+    <span class="urgent">urgent</span>
+    <span class="not-urgent">not urgent</span>
+  </div>
+  <div class="row">
+    <div id="afternoon" class="bucket">
+      <div class="bucket-label">Afternoon</div>
+      <!-- Tasks go here -->
+    </div>
+    <div style="display:none"id="evening" class="bucket"> <!-- hide on default view -->
+      <div class="bucket-label">Evening</div>
+      <!-- Tasks go here -->
+    </div>
+  </div>
+  <div class="vertical-line">
+    <span class="important">important</span>
+    <span class="unimportant">not important</span>
+  </div>
+</div><!--  end canvas -->
+
       <button id="all-done-btn" onclick="allDone()">All done</button>
     </div>
   </div>
